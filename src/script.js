@@ -1,9 +1,15 @@
-document.getElementById('registration').addEventListener('click', redirect)
-function redirect() {
-    window.location = '/registration'
-}
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#registration').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const eventId = event.target.dataset.eventId;
+            window.location.href = `/registration/${eventId}`;
+        });
+    });
 
-document.getElementById('view').addEventListener('click', red)
-function red() {
-    window.location = '/participants'
-}
+    document.querySelectorAll('#view').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const eventId = event.target.dataset.eventId;
+            window.location.href = `/participants/${eventId}`;
+        });
+    });
+});
