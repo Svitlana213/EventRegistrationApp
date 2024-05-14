@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 
 app.get('/registration/:eventId', (req, res) => {
     const eventId = req.params.eventId;
-    res.render('register', { eventId });
+    res.render('registration', { eventId });
 });
 
 app.post('/register', (req, res) => {
