@@ -5,7 +5,7 @@ const sqlite3 = require('sqlite3').verbose()
 const bodyParser = require('body-parser')
 
 const app = express()
-const PORT = 8080
+const PORT = 8000
 const httpServer = http.createServer(app)
 
 app.set('view engine', 'ejs')

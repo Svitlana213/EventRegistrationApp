@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/participants.css" rel="stylesheet" type="text/css">
     <title>Event Participants</title>
 </head>
 
@@ -12,20 +13,20 @@
     <h1>Event participants</h1>
 
     <% if(participants.length === 0) { %>
-        <p>No participants have registered for this event yet</p>
+        <h3>No participants have registered for this event yet</h3>
     <%} else{ %>
         <% participants.forEach((participant)=> { %>
-            <div class="card-wrapper">
-                <div class="card">
-                    <div class="card-body">
+            <div class="list-wrapper">
+                <ul class="participant">
+                    <li>
                         <h2>
                             <%= participant.full_name %>
                         </h2>
                         <p>
                             <%= participant.email %>
                         </p>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         <% }) %>
     <%}%>

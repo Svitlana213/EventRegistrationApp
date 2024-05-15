@@ -4,11 +4,13 @@
 }
 
 :root {
-    --background-color: #EED6D3;
-    --card-background: #EED6D3;
+    --background-color: #f0ece0;
     --text-color: #463b3f;
     --placeholder-color: #a8a7a7;
-    --button-color: #E8B4B8;
+    --button-color: #c1dae9;
+
+    --border: 1px solid;
+
     --main-title-size: 50px;
     --title-size: 36px;
     --text-size: 24px;
@@ -33,6 +35,12 @@ h2{
     font-size:var(--title-size);
 }
 
+h3{
+    font-size: var(--title-size);
+    text-align: center;
+    margin-top: 40px;
+}
+
 p, label{
     margin: 10px;
     font-size: var(--text-size);
@@ -50,10 +58,9 @@ p, label{
 
 .card{
     width: 450px;
-    height: 400px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 20px;
+    height: auto;
+    border: var(--border);
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -65,8 +72,8 @@ button{
     cursor: pointer;
     background-color: var(--button-color);
     font-size: var(--text-size);
+    border: var(--border);
     border-radius: 10px;
     margin: 15px;
     padding: 15px 20px;
-    bottom: 0;
 }
