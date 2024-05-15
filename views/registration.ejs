@@ -10,39 +10,42 @@
 <body>
     <h1>Event registration</h1>
     <div class="card-wrapper">
-        <form action="">
+        <form action="/register" method="POST">
+
+            <input type="hidden" name="event_id" value="<%= eventId %>">
+
             <div class="input">
                 <h2>Full name</h2>
-                <input type="text" id="" name="" placeholder=" Enter your name" required><br>
+                <input type="text" name="full_name" placeholder=" Enter your name" required><br>
             </div>
 
             <div class="input">
                 <h2>Email</h2>
-                <input type="text" id="" name="" placeholder=" Enter your email" required><br>
+                <input type="text" name="email" placeholder=" Enter your email" required><br>
             </div>
 
             <div class="input">
                 <h2>Date of birth</h2>
-                <input type="text" id="" name="" placeholder=" Enter your date of birth" required><br>
+                <input type="text" name="date_of_birth" placeholder=" Enter your date of birth" required><br>
             </div>
 
             <div class="input">
                 <h2>Where did you hear about this event?</h2>
 
-                <input type="radio" id="media" name="source" value="media"><label for="media">Social media</label><br>
+                <input type="radio" id="media" name="sourse" value="media"><label for="media">Social media</label><br>
 
-                <input type="radio" id="friends" name="source" value="friends"><label for="friends">Friends</label><br>
+                <input type="radio" id="friends" name="sourse" value="friends"><label for="friends">Friends</label><br>
 
-                <input type="radio" id="myself" name="source" value="myself"><label for="myself">Found myself</label><br>
+                <input type="radio" id="myself" name="sourse" value="myself"><label for="myself">Found myself</label><br>
             </div>
 
             <div class="input">
                 <h2>Why are you going?</h2>
-                <input type="text" id="" name="" placeholder=" Why are you going?" required><br>
+                <input type="text" name="reason" placeholder=" Why are you going?" required><br>
             </div>
 
 
-            <button>Submit</button>
+            <button type="submit">Submit</button>
 
         </form>
     </div>

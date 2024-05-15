@@ -1,71 +1,70 @@
-const http = require('http');
-const express = require('express');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
+const http = require('http')
+const express = require('express')
+const path = require('path')
+const sqlite3 = require('sqlite3').verbose()
+const bodyParser = require('body-parser')
 
-const app = express();
-const PORT = 8080;
-const httpServer = http.createServer(app);
+const app = express()
+const PORT = 8080
+const httpServer = http.createServer(app)
 
-// Set the view engine to EJS
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'))
 
-// Set views directory
-app.set('views', path.join(__dirname, 'views'));
-
-// Serve static files
-app.use("/src", express.static(path.join(__dirname, "src")));
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/src", express.static(path.join(__dirname, "src")))
+app.use(express.static(path.join(__dirname, "public")))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const db = new sqlite3.Database('./database/database.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
-        return console.log(err.message);
+        return console.log(err.message)
     }
-    console.log('Connected to the SQLite database.');
-});
+    console.log('Connected to the SQLite database.')
+})
 
-app.use(express.json());
+app.use(express.json())
 
 app.get('/', (req, res) => {
     db.all('SELECT * FROM event', (err, rows) => {
         if (err) {
-            console.error(err.message);
-            res.status(500).send('Internal server error');
+            console.error(err.message)
+            res.status(500).send('Internal server error')
         } else {
-            res.render('index', { events: rows });
+            res.render('index', { events: rows })
         }
-    });
-});
+    })
+})
 
-app.get('/registration/:eventId', (req, res) => {
-    const eventId = req.params.eventId;
-    res.render('registration', { eventId });
-});
+app.get('/registration/:id', (req, res) => {
+    const eventId = req.params.id
+    res.render('registration', { eventId })
+})
 
 app.post('/register', (req, res) => {
-    const { eventId, full_name, email, date_of_birth, source, reason } = req.body;
+    const { event_id, full_name, email, date_of_birth, sourse, reason } = req.body
 
-    db.run('INSERT INTO participants (event_id, full_name, email, date_of_birth, source, reason) VALUES (?, ?, ?, ?, ?, ?)',
-        [eventId, full_name, email, date_of_birth, source, reason],
+    db.run('INSERT INTO participants (event_id, full_name, email, date_of_birth, sourse, reason) VALUES (?, ?, ?, ?, ?, ?)',
+        [event_id, full_name, email, date_of_birth, sourse, reason],
         (err) => {
             if (err) {
-                res.status(500).send('Database error');
+                console.error(err.message)
+                res.status(500).send('Database error')
             } else {
-                res.redirect(`/participants/${eventId}`);
+                res.redirect(`/participants/${event_id}`)
             }
-        });
-});
+        })
+})
 
-app.get('/participants/:eventId', (req, res) => {
-    const eventId = req.params.eventId;
+app.get('/participants/:event_id', (req, res) => {
+    const eventId = req.params.event_id
 
     db.all('SELECT * FROM participants WHERE event_id = ?', [eventId], (err, rows) => {
         if (err) {
-            res.status(500).send('Database error');
+            res.status(500).send('Database error')
         } else {
-            res.render('participants', { participants: rows });
+            res.render('participants', { participants: rows })
         }
-    });
-});
+    })
+})
 
-httpServer.listen(PORT, () => console.debug(`Server listening on http://localhost:${PORT}`));
+httpServer.listen(PORT, () => console.debug(`Server listening on http://localhost:${PORT}`))

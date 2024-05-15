@@ -13,7 +13,8 @@
     <% events.forEach((event)=> { %>
         <div class="card-wrapper">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" >
+
                     <h2>
                         <%= event.title %>
                     </h2>
@@ -26,8 +27,8 @@
                     <p>
                         <%= event.organizer %>
                     </p>
-                    <button class="registration">Register</button>
-                    <button class="view">View</button>
+                    <button class="registration"  data-event-id="<%= event.id %>">Register</button>
+                    <button class="view" data-event-id="<%= event.id %>">View</button>
                 </div>
             </div>
         </div>
